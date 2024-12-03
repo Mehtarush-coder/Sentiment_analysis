@@ -1,0 +1,307 @@
+{
+    "industries": {
+      "Food and Beverages": {
+        "departments": {
+    "Health & Safety": [
+        "healthy", "vegan", "safe", "allergy", "allergens", "precautions",
+        "non-dairy", "gluten-free", "organic", "hygiene", "sanitation", "non-GMO",
+        "allergen-free", "risk", "safety", "natural", "clean", "toxin-free",
+        "chemical-free", "plant-based", "nut-free", "low-calorie", "preservative-free",
+        "health standards", "nutritional"
+    ],
+    "Finance/Accounting": [
+        "price", "expensive", "budget", "cost", "value", "discount", "payment",
+        "money", "savings", "receipt", "overpriced", "deal", "charge", "refund",
+        "cash", "credit", "transaction", "billing", "promotion", "coupon", "tax",
+        "invoice", "cost-effective", "pricing", "sale", "affordable", "reimbursement","pricy"
+    ],
+    "Inventory/Logistics": [
+        "stock", "supply", "batch", "level", "inventory", "availability", "replenish", 
+        "warehouse", "logistics", "shipment", "dispatch", "shortage", "surplus", 
+        "distribution", "order", "out of stock", "fulfillment", "storage", "restock", 
+        "sourcing", "procurement", "handling", "transportation", "backorder", 
+        "tracking", "supply chain", "delivery","wait","late","minutes","waiting"
+    ],
+    "Retail/Store Operations": [
+        "location", "store", "shop", "counter", "inside", "outside", "open", "buy",
+        "find", "items", "bakery", "checkout", "line", "market", "box", "bag",
+        "packing", "product display", "customer traffic", "aisles", "shelves", "layout",
+        "in-store", "footfall", "queue", "interior", "cashier", "POS", "hours", 
+        "redecorating", "signage", "merchandising"
+    ],
+    "Operations/Production": [
+        "time", "production", "make", "bake", "work", "packaging", "prepare", 
+        "frozen", "cooking", "size", "create", "recipe", "process", "efficiency", 
+        "schedule", "baker", "quality control", "automation", "timing", "manufacture",
+        "prep", "temperature", "shelf life", "factory", "workflow", "throughput",
+        "scaling", "packaging materials", "production cycle"
+    ],
+    "Quality Control": [
+        "quality", "taste", "soft", "moist", "yummy", "delicious", "sweet", "flavor",
+        "dry", "hard", "rich", "smooth", "crispy", "amount", "fresh", "rotten", 
+        "stale", "texture", "flavorful", "consistency", "richness", "presentation",
+        "burnt", "undercooked", "garnish", "ingredient quality", "look", "appearance",
+        "bite", "exquisite", "genuine", "standard", "premium", "fineness", "balanced",
+        "testing", "inspection", "recipe integrity","mushy","dripping"
+    ],
+    "Sales/Marketing": [
+        "best", "love", "really", "amazing", "definitely", "great", "perfect", 
+        "always", "recommended", "enjoy", "special", "new", "favorite", "must", 
+        "variety", "selection", "excited", "highly", "happy", "awesome", "tasting",
+        "unique", "promote", "campaign", "customer base", "advertise", "social media", 
+        "brand", "publicity", "target audience", "seasonal", "promo", "launch", 
+        "buzz", "outreach", "word-of-mouth", "loyalty", "membership", "offer", "reach", 
+        "online presence", "engagement", "merchandise", "endorse"
+    ],
+    "Customer Service": [
+        "service", "staff", "friendly", "helpful", "customer", "employees",
+        "wanted", "visit", "check", "reviews", "response", "waiting",
+        "seating", "atmosphere", "felt", "treats", "food", "gave", "ask", "support",
+        "inquiry", "feedback", "assistance", "complaint", "issue", "resolve", 
+        "respectful", "politeness", "welcome", "comfort", "customer care", 
+        "phone support", "courteous", "greeting", "hospitality", "response time", 
+        "satisfaction", "interaction", "professional", "approachable", "queue management","experience","rude"
+    ]
+            }
+            
+        },
+      
+      "Healthcare": {
+        "departments": {
+            
+        "Product Drug": [
+            "effective", "works well", "quick relief", "not effective", "failed", 
+            "immediate effect", "long-term benefit", "no improvement", "side effect", 
+            "cure", "result","medication", "pill", "prescription", "dosage", 
+            "pharmacy", "tablet", "brand", "disorder", "acne"    
+        ],
+        "Customer Service & Patient Experience": [
+        "service", "helpful", "staff", "friendly", "appointment", "response", "customer", "quality",
+        "reviews", "waiting", "recommend", "ask", "made", "given", "feedback", "assistance", "experience",
+        "make", "want", "satisfaction", "questions", "respond","review", "feedback", "satisfaction", "rating", "overall", "happy", "care", "patient","helps","help","saved","work for me",
+        "Horrible","No complaints","great","good","relax","calm","wonderful","excellent","bad","Powerful","weird","worked","work","problems","burniing","itching"
+        ],
+        
+        "Medical Equipment & Technology": [
+            "equipment", "drug", "dosage", "prescribed", "medicine", "pill", "dose", "vaccine", "telehealth",
+            "online", "diagnostic", "medical devices", "technology", "insertion", "shot", "prescription"   
+        ],
+        "Patient Care": [
+        "pain", "doctor", "treatment", "medication", "surgery", "recovery", "anxiety", "depression",
+        "help", "healing", "therapy", "nausea", "painful", "cramps", "headaches", "migraines", "sick",
+        "diagnosed", "infection", "symptoms", "feeling", "experiencing", "relief", "severe", "mood",
+        "effects", "suffered", "fatigue", "control", "health", "improvement","nausea", "dizziness", "headache", "vomiting", "rash", "swelling", 
+        "allergic reaction", "fatigue", "pain", "irritation", "adverse reaction", "complications"
+        ],
+        
+        "Pricing": [
+        "price","Over priced","cost", "affordable", "expensive", "billing", "charge", "payment", "refund", "discount",
+        "value", "pricing", "financial", "budget", "overpriced", "payment plan", "fee", "rates","pri"
+    ],
+    "Delivery and Shipping": [
+        "fast delivery", "delayed", "on-time", "lost package", "tracking issues", 
+        "damaged in transit", "shipping cost", "courier service", "smooth delivery", 
+        "late arrival", "free shipping", "delivery charges", "next-day delivery", 
+        "package intact", "wrong address", "misdelivered", "timely updates", 
+        "no tracking available", "express delivery", "delivered to the neighbor",
+        "package stolen", "no confirmation", "courier rude","late","deliver", "shipping", "arrive", "arrived", "on time", "late", "DOA", "dead on arrival", "shipment", "box", 
+        "fedex", "fd"
+    ]
+            
+            
+        }
+      },
+      "Real Estate": {
+        "departments": {
+        "Cleanliness and Maintenance": [
+        "dirty", "clean", "spotless", "dusty", "hygienic", "smelly", "messy", 
+        "well-maintained", "untidy", "filthy", "sanitized", "unclean", 
+        "fresh linens", "modern appliances", "fully equipped", "well-kept", 
+        "comfortable bed", "cozy", "comfortable", "beautiful", "leaking roof", 
+        "pest-free", "renovated", "broken fixtures", "landscaping", 
+        "freshly painted", "maintenance issue", "neat", "cracks in walls", "repairs needed","perfect room","perfect accomodation","perfect place"
+    ],
+    "Host and Customer Interaction": [
+        "friendly", "rude host", "unresponsive", "helpful", "accommodating", 
+        "unavailable", "welcoming", "polite", "host support", "quick response", 
+        "good communication", "bad communication", "Airbnb support", "responsive", 
+        "unresponsive", "quick resolution", "issue not resolved", 
+        "good customer service", "slow response", "complaint handled", "support team", 
+        "prompt", "wonderful", "host canceled", "attentive", "property manager", 
+        "realtor", "agent", "easy to reach", "unprofessional", "courteous","perfect","host"
+    ],
+    "Booking and Check-in Process": [
+        "easy booking", "difficult to book", "user-friendly", "confusing process", 
+        "booking issues", "smooth transaction", "payment problem", "instant booking", 
+        "hassle-free", "easy check-in", "easy check-out", "check-in issue", 
+        "late check-out", "early check-in", "smooth process", "key access", 
+        "complicated check-in", "clear instructions", "door code", "near public transport", 
+        "central location", "hard to find", "great location", "convenient", 
+        "scenic", "remote", "safe neighborhood", "perfect spot", "canceled", 
+        "quick process", "viewing scheduled", "visit arrangements", "timely updates"
+    ],
+    "Pricing": [
+        "worth the price", "expensive", "cheap", "affordable", "overpri", 
+        "great value", "budget-friendly", "costly", "reasonable price", 
+        "money well spent", "hidden charges", "competitive pricing", 
+        "costly repairs", "maintenance fees", "investment-worthy", "negotiable","low","price"
+    ],
+    "Safety and Security": [
+        "safe", "secure", "unsafe", "break-in", "security measures", 
+        "trustworthy", "locks", "neighborhood safety", "camera", 
+        "key safety", "gated community", "surveillance", "well-lit", 
+        "peaceful", "crime-prone", "child-safe", "secure parking", 
+        "fire alarm", "emergency exits"
+    ],
+    "Guest Experience": [
+        "amazing experience", "bad experience", "pleasant stay", 
+        "uncomfortable", "relaxing", "memorable", "ruined trip", 
+        "enjoyable", "stress-free", "terrible stay", "exceptional", 
+        "great", "appreciate", "nice", "comfortable", "wifi", 
+        "kitchen", "air conditioning", "pool", "hot water", 
+        "parking", "washer", "dryer", "excellent", "enjoyed", 
+        "good place", "lovely", "experience", "wonderful", 
+        "fantastic", "good location", "spacious", "well-furnished", 
+        "family-friendly", "luxury", "modern design", "aesthetic", 
+        "good ambiance", "value-added", "perfect for events", 
+        "peaceful retreat", "home-like feeling", "privacy"
+    ]
+        }
+      },
+      "Travel & Airline":{
+        "departments":{
+            "Accommodation": [
+        "clean rooms", "comfortable beds", "dirty", "luxury stay", "poor hygiene", 
+        "room service", "spacious", "cramped", "amenities", "hot water", "noisy", 
+        "quiet", "well-maintained", "broken furniture", "view from room", 
+        "fresh linens", "smelly", "cozy", "air conditioning", "minibar", 
+        "outdated", "modern", "bathroom", "room upgrade"
+    ],
+    "Catering and Cuisine": [
+        "delicious", "bland", "variety", "limited menu", "vegetarian options", 
+        "vegan-friendly", "seafood", "local cuisine", "overpriced food", 
+        "cheap eats", "slow service", "quick service", "chef special", 
+        "fresh ingredients", "stale food", "buffet", "fine dining", 
+        "breakfast", "lunch", "dinner", "all-inclusive", "drinks", "bar", "snacks"
+    ],
+    "Travel and Connectivity": [
+        "easy to reach", "remote", "public transport", "shuttle service", 
+        "airport pickup", "rental car", "free parking", "expensive parking", 
+        "walking distance", "well-connected", "hard to find", "road condition", 
+        "bike rental", "transport options", "accessible", "handicap-friendly", 
+        "convenient location", "transport cost","cancel","poor"
+    ],
+    "Customer Service": [
+        "friendly staff", "rude staff", "helpful", "unresponsive", 
+        "polite", "unwelcoming", "quick resolution", "issue unresolved", 
+        "professional", "courteous", "attentive", "ignored", "hospitality", 
+        "service quality", "welcoming", "staff availability", "guidance", 
+        "responsive", "manager support","service","bad behaviour","good service","customer","unfriendly","terrible","Service"
+    ],
+    "Entertainment and Culture": [
+        "guided tour", "adventure sports", "local attractions", "museum", 
+        "park", "hiking", "cultural experience", "family-friendly", 
+        "nightlife", "beach", "shopping", "relaxing", "crowded", 
+        "scenic", "excursions", "entertainment", "not worth it", 
+        "once in a lifetime", "historical sites"
+    ],
+    "Pricing and Value": [
+        "great value", "worth the money", "overpri", "budget-friendly", 
+        "luxury", "deals", "discount", "extra fees", "all-inclusive", 
+        "cost-effective", "not worth it", "value for money","overpriced","cheating","waste"
+    ],
+    "Safety and Security": [
+        "safe neighborhood", "secure", "unsafe", "trustworthy", 
+        "security measures", "lost item", "break-in", "emergency support", 
+        "peaceful", "locks", "well-lit", "security staff", "threatened", 
+        "camera surveillance", "personal safety"
+    ],
+    "Travel Experience": [
+        "memorable trip", "ruined vacation", "stress-free", "uncomfortable", 
+        "amazing experience", "disorganized", "smooth trip", "exceptional", 
+        "poor management", "perfect getaway", "not worth it", "family trip", 
+        "solo travel", "honeymoon", "group travel", "bad experience", 
+        "relaxing", "exciting", "unforgettable", "unexpected","Worst","delays","experience","comfortable","very"
+    ]
+        }
+      },
+      "Ecommerce": {
+      "departments": {
+        "Product": [
+        "durable","simple","defective", "high-quality", "poor-quality", "reliable","poor condition","excellent","comfortable",
+        "damaged", "as described", "good packaging", "authentic", "fake", "Beautiful","exactly",
+        "sturdy", "excellent material", "substandard", "faulty", "well-crafted","great",
+        "premium", "cheap material", "broken", "scratched", "lightweight","comfort","fit",
+        "heavy", "easy to assemble", "fragile", "original", "replacement needed","good","decent","poor","disappointed","good quality",
+        "quality", "wilt", "water", "bulb", "droopy", "bruise", "damage", 
+        "bloom", "long lasting", "love", "perfect", "look as", "old", 
+        "dead", "fresh", "fabulous","good", "great", "excellent", "perfect", "amazing", "fantastic", "wonderful", "superior", "ideal", "flawless",
+        "powerful", "fast", "efficient", "reliable", "durable", "sturdy",
+        "high-quality", "premium", "well-made", "well-crafted",
+        "easy to use", "user-friendly", "simple",
+        "affordable", "good value",
+        "helpful", "responsive", "friendly", "supportive"
+
+
+    ],
+    "Pricing and Value": [
+        "affordable", "overpri", "value for money", "expensive", "cheap", 
+        "reasonable", "discount", "deals", "worth the price", "cost-effective", 
+        "hidden charges", "great value", "budget-friendly", "too costly", 
+        "competitive pricing", "scam pricing", "bargain", "overpriced for quality",
+        "money well spent", "not worth it", "steep price", "best deal","waste of money","price","worth the money",
+        "competitive", "price", "cost", "expensive", "cheap", "value", 
+        "money", "affordable", "overpri", "$"
+    ],
+    "Delivery and Shipping": [
+        "fast delivery", "delayed", "on-time", "lost package", "tracking issues", 
+        "damaged in transit", "shipping cost", "courier service", "smooth delivery", 
+        "late arrival", "free shipping", "delivery charges", "next-day delivery", 
+        "package intact", "wrong address", "misdelivered", "timely updates", 
+        "no tracking available", "express delivery", "delivered to the neighbor",
+        "package stolen", "no confirmation", "courier rude","late","deliver", "shipping", "arrive", "arrived", "on time", "late", "DOA", "dead on arrival", "shipment", "box", 
+        "fedex", "fd"
+    ],
+    "Customer Service": [
+        "responsive", "helpful", "rude", "unresponsive", "quick resolution", 
+        "refund issued", "issue unresolved", "polite staff", "complaint handling", 
+        "support team", "excellent service", "bad experience", "long waiting time", 
+        "not helpful", "professional", "courteous", "no response", "escalated",
+        "live chat", "email support", "call center", "bad attitude", "efficient",
+        "understanding", "problem solved", "ignored complaint", "prompt response",
+         "support", "help", "service", "staff", "representative", 
+        "communication", "customer","support", "help", "service", "staff", "representative", "communication"
+    ],
+    "Brand Reputation": [
+        "trusted brand", "well-known", "reliable", "shady", "great reputation", 
+        "ethical", "misleading", "authentic", "fake products", "scam", "poor branding",
+        "renowned", "respected", "questionable", "brand ambassador", "global brand",
+        "established", "innovative", "leader in the market", "consistent quality","Amazing",
+        "inferior reputation", "misrepresentation", "popular", "fraudulent brand","experience","loved"
+    ],
+    "Purchase Experience":[
+        "easy", "excellent", "disappoint", "stunning", "Thank you", "Arrang", 
+    "checkout", "purchase", "buy", "order", "transaction", "awesome", 
+    "gorgeous", "experience", "selection", "arrangement", "packag", 
+    "card", "beautiful", "amazing", "great", "great flower", "impres", 
+    "recommend", "exceptional", "please", "gift", "refund", "store credit"
+    ],
+    "Marketing": [
+      "advertise", "email", "marketing", "promotion", "campaign", "sales", "social media", "advertisement", "content", "strategy", "brand awareness", "promotion", "discount",
+      "coupon", "offer", "new arrival", "exclusive", "viral"
+    ],
+    "Website": [
+      "website", "promo", "design", "easy navigation", "UI", "UX", "load time", "responsive", "user-friendly", "mobile-friendly", "fast load", "broken link", "shopping cart",
+      "secure payment", "cart issue", "site speed", "search function", "search filter", "checkout", "log-in", "signup", "login issue", "webpage", "URL", "error", "pop-up"
+    ]
+    
+      }
+    }
+    }
+}
+  
+
+
+
+
+

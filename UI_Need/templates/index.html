@@ -1,0 +1,1008 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>File Upload</title>  
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <style>
+        .left-column {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 160px; /* Adjust the width as needed */
+             height: 100%;
+             background-color: #404040;
+             padding: 20px; /* Add padding for spacing */
+
+             
+         }
+         .margin-tops {
+          margin-top: 20px; /* Adjust the top margin as needed */
+          margin-bottom: 20px; 
+          margin-left: 240px;/* Optional: Add bottom margin */
+      }
+ 
+         .left-column h2 {
+             margin: 0;
+             font-size: 18px;
+             text-align: center;
+             /* animation: blink 1s infinite; */
+         }
+ 
+         .content {
+             margin-left: 220px;
+             width: calc(100% - 220px);/* Adjust for left column width */
+         }
+ 
+         .loading-image {
+             animation: blink 1s infinite;
+             display: block;
+             margin: 0 auto;
+         }
+ 
+         @keyframes blink {
+             0% { opacity: 1; }
+             50% { opacity: 0.5; }
+             100% { opacity: 1; }
+         }
+         .keyword-count-container {
+          margin-bottom: 40px;
+          margin-left: 220px;  /* Adjust the margin value as needed */
+         }
+         .pie-chart-container{
+          margin-left: 200px;  /* Adjust the margin value as needed */
+        }
+        #cloudd{
+          margin-left: 220px;
+
+        } 
+        #npspiechartcontainer{
+          margin-left: 378px;
+          margin-top: -27px;
+          width: 30%;
+
+        }
+        #npspiechartcontainerthree{
+          margin-left: 120px;
+          margin-top: 50px;
+          width: 80%;
+        }
+
+         table {
+  /* font-family: Calibri, sans-serif; */
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+
+}
+td img {
+    display: block;
+    margin: 0 auto;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* tr:nth-child(even) {
+  background-color: #dddddd;
+} */
+
+.large-emoji {
+    font-size: 28px; /* Adjust the size as needed */
+}
+
+.progress-bar-fill {
+    width: 300px;
+    height: 20px;
+    border: 1px solid #ccc;
+    background-color: #1b0505;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4CAF50;
+    width: 0%; /* Initially set to 0% */
+    transition: width 0.5s ease-in-out;
+    display: block;
+}
+
+#progressLabel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+}
+.clear {
+  clear: both;
+}
+#second{
+  margin-left: 40px; 
+}
+#dropdown:hover {
+    background-color: #f1f1f1;
+}
+
+#checkboxes label {
+    padding: 5px;
+}
+#valueaddition {
+    max-width: 600px; /* Adjust the width as needed */
+    word-wrap: break-word; /* Wrap long words */
+    white-space: normal; /* Enable text wrapping for long sentences */
+}
+
+
+/* table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-left: 240px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .header-row th {
+            background-color: #ddd;
+            font-weight: bold;
+        } */
+
+
+
+
+
+    </style>
+</head>
+
+
+
+<body>
+  <!-- <div id="progress-container" style="margin-left: 150px;">
+    <p>Progress: <span id="progress-percent">0</span>%</p>
+    <p>Time Remaining: <span id="time-remaining">Calculating...</span></p>
+</div> -->
+
+    <div class="left-column">
+        <h2 style="color: white; font-size: 24px;">Sentimental Analysis</h2>
+    </div>
+
+    <div class="clear"></div> <div class="content">
+        <h1>Upload Excel File</h1>
+    <!-- <form method="POST" enctype="multipart/form-data" onsubmit="return validateFileType(event)">
+        {% csrf_token %}
+        <input type="file" name="excel_file">
+        <button type="submit">Run Script</button> -->
+        <!-- <div id="progress-bar"></div> -->
+        <!-- <div class="progress-bar-container"></div>
+            <div class="progress-bar" id="progressBar"></div>
+            <label id="progressLabel">0%</label>
+        </div> -->
+    <!-- </form> -->
+    <form method="POST" enctype="multipart/form-data" onsubmit="return validateFileType(event)">
+      {% csrf_token %}
+      
+      <!-- Industry Selection Dropdown -->
+      <label for="industry">Select Industry:</label>
+      <select name="industry" id="industry" required>
+          <!-- <option value="">--Select Industry--</option> -->
+          {% for industry in industries %}
+              <option value="{{ industry }}" {% if industry == selected_industry %}selected{% endif %}>{{ industry }}</option>
+          {% endfor %}
+      </select>
+      
+      <!-- File Upload Input -->
+      <input type="file" name="excel_file" required>
+      
+      <!-- Run Script Button -->
+      <button type="submit">Run Script</button>
+  </form>
+  
+    <div id = "multiplecheck" style="margin-left: 10px; position: relative;display: none; ">
+      <h3>Select Years:</h3>
+      <div id="dropdown" style="border: 1px solid #ccc; padding: 10px; width: 200px; cursor: pointer;">
+          Select Years
+      </div>
+      <div id="checkboxes" style="display: none; position: absolute; background: white; border: 1px solid black; z-index: 1000; max-height: 150px; overflow-y: auto;">
+          <form id="year-form">
+              {% for year in years %}
+                  <label style="display: block;">
+                      <input type="checkbox" value="{{ year }}" class="year-checkbox" {% if year == selected_year %}checked{% endif %}>
+                      {{ year }}
+                  </label>
+              {% endfor %}
+          </form>
+      </div>
+      <button onclick="updatePlot()">Update Plot</button>
+  </div>
+    <!-- <div id="progress-bar">
+        <div id="progress-bar-fill" data-progress-percentage="{{ progress_percentage }}"></div>      
+    </div> -->
+        {% if show_results %}
+              <table id="sentimentTable" >
+                  <!-- <h2 id="valueaddition">Overall Sentiments based on {{total_data}} reviews from year {{selected_year}}</h2> -->
+                  <h2 id="valueaddition" style="max-width: 600px; word-wrap: break-word;font-size: 20px;">
+                    Overall Sentiments based on {{total_data}} reviews from year {{selected_year}}
+                </h2>
+                
+                  <tr>
+                      <th>Sentiment</th>
+                      <th></th>
+                      <th>Percentage</th>
+                      <th>TotalCounts</th>
+                  </tr>
+                  <tr>
+                    <td>Positive</td>
+                    <td>
+                        <img src="{% static 'Positive_Emoji.png' %}" alt="Positive Emoji" width="34" height="34">
+                    </td>
+                    <td id="positive-percentage">{{ positive_count_percentage }} %</td>
+                    <td id="positive-count">{{ positive_count }}</td>
+                </tr>
+                <tr>
+                    <td>Neutral</td>
+                    <td>
+                        <img src="{% static 'Neutral_Emoji.png' %}" alt="Neutral Emoji" width="34" height="34">
+                    </td>
+                    <td id="neutral-percentage">{{ neutral_count_percentage }} %</td>
+                    <td id="neutral-count">{{ neutral_count }}</td>
+                </tr>
+                <tr>
+                    <td>Negative</td>
+                    <td>
+                        <img src="{% static 'Negative_Emoji.png' %}" alt="Negative Emoji" width="34" height="34">
+                    </td>
+                    <td id="negative-percentage">{{ negative_count_percentage }} %</td>
+                    <td id="negative-count">{{ negative_count }}</td>
+                </tr>
+              
+                  <!-- <tr>
+                      <td>Positive</td>
+                      <td>
+                        <img src="{% static 'Positive_Emoji.png' %}" alt="Positive Emoji" width="34" height="34">
+                    </td>
+                      <td>{{ positive_count_percentage}} %</td>
+                      <td>{{ positive_count }}</td>
+                      
+                  </tr>
+                  <tr>
+                      <td>Neutral</td>
+                      <td>
+                        <img src="{% static 'Neutral_Emoji.png' %}" alt="Neutral Emoji" width="34" height="34">
+                    </td>
+                      <td>{{ neutral_count_percentage}} %</td>
+                      <td>{{ neutral_count }}</td>
+                      
+                  </tr>
+                  <tr>
+                      <td>Negative</td>
+                      <td>
+                        <img src="{% static 'Negative_Emoji.png' %}" alt="Positive Emoji" width="34" height="34">
+                    </td>
+                      <td>{{ negative_count_percentage}} %</td>
+                      <td>{{ negative_count }}</td>
+                  </tr> -->
+                </table>
+            
+
+        <!-- <h3>TOP 5 SUPPLIER NAME BASE ON POSITIVE SENTIMENTS </h3>
+
+        <ul>
+            <img src="data:image/png;base64,{{ plot_data }}" alt="Plot" width="600" height="400">
+        </ul>  -->
+        <!-- <div class="chart-container">
+            <h3>TOP 5 SUPPLIER NAME BASE ON POSITIVE SENTIMENTS </h3>
+            <img src="data:image/png;base64,{{ plot_data }}" alt="Plot" width="300" height="200" style="float: left;">
+        </div>
+        <div class="right-column">
+            <h3>BOTTOM 5 SUPPLIER NAME BASE ON NEGATIVE SENTIMENTS </h3>
+            <img src="data:image/png;base64,{{ negative_plot_data }}" alt="Negative Plot" width="300" height="200"> -->
+        <!-- </div> -->
+
+                
+        <!-- <div class="row"  >
+            <h2>Top 5 Suppliers by Sentiments</h2>
+            <div class="column">
+                <img id="plotImage" src="data:image/png;base64,{{ plot_data }}" alt="Plot" width="500" height="500" style="float: left; display: none;">
+            </div>
+            <div class="column">
+                <img id="negativePlotImage" src="data:image/png;base64,{{ negative_plot_data }}" alt="Negative Plot" width="500" height="500" style="display: none; margin-left: 600px;">
+            </div>
+        </div> -->
+        <!-- <div class="row" style="margin-top: 100px; margin-bottom: 100px;">
+            <h2>Top 5 Products by Sentiments</h2>
+            <div class="column">
+                <img id="productPlotImage" src="data:image/png;base64,{{ product_plot_data }}" alt="Plot" width="500" height="500" style="float: left; display: none;">
+            </div>
+            <div class="column">
+                <img id="productNegativePlotImage" src="data:image/png;base64,{{ product_negative_plot_data }}" alt="Negative Plot" width="500" height="500" style="display: none;margin-left: 600px;">
+            </div>
+        </div> -->
+        <!-- <div class="row">
+            {% for sentiment, image in word_cloud.items %}
+              <div class="column">
+                <h2>{{ sentiment }} Sentiment Word Cloud</h2>
+                <img src="data:image/png;base64,{{ image }}">
+              </div>
+            {% endfor %}
+          </div> -->
+          
+          <!-- <div class="word-frequency-container">
+            <h2>Top 10 keywords By Positive Sentiment</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Word</th>
+                  <th>Frequency</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for word, count in top_10_words %}
+                  <tr>
+                    <td>{{ word }}</td>
+                    <td>{{ count }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+      
+            <h2>Bottom 10 keywords By Negative Sentiment</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Word</th>
+                  <th>Frequency</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for word, count in least_10_words %}
+                  <tr>
+                    <td>{{ word }}</td>
+                    <td>{{ count }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div> -->
+        {% endif %}
+
+
+        <div class="row" style="margin-top: 50px; margin-bottom: 10px; margin-left: -132px;">
+          <div class="column" >   
+              <!-- <img id="npspiechartcontainerthree" src="data:image/png;base64,{{ NPSSS }}"> -->
+              <img id="npspiechartcontainerthree" src='' style="display: none;">
+          </div>
+        </div>
+      
+        <div class="row"  >
+          <div class="column" >
+              <!-- <img id="npspiechartcontainer" src="data:image/png;base64,{{ NPSScoress }}"> -->
+              <img id="npspiechartcontainer" src='' style="display: none;">
+          </div>
+        </div>
+
+
+      
+
+      <!-- <div class="row" id="cloudd">
+          {% for sentiment, image in word_cloud_Fedex.items %}
+            <div class="column">
+              <h2>{{ sentiment }} Sentiment Word Cloud (FedEx)</h2>
+              <img id= "cloudfedex" src="data:image/png;base64,{{ image }}"style="display: none;">
+            </div>
+          {% endfor %}
+      </div> -->
+
+      
+
+      <!-- <h1>Yearly Sentiment Analysis </h1>
+    <select id="year-dropdown" onchange="updatePlot()" style="margin-left: 500px;">
+      {% for year in years %}
+      <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
+      {% endfor %}
+  
+    </select>
+
+    <h2>Sentiment Trend ({{ year }})</h2>
+    <img src="data:image/png;base64,{{ plot_data_image }}" alt="Sentiment Trend" style="margin-left: 300px;"> -->
+  
+  
+
+
+
+  <img id="plot" src="" alt="Sentiment Trend Plot" style="margin-top: -75px; margin-left: 119px; margin-bottom:70px; display: none;width: 75%;" />
+
+  <!-- <img id="plot-yearly-percentage" src="" alt="plot_yearly_percentage_changes" style="margin-top: -75px; margin-left:-80px;display: none;" /> -->
+
+  <img id="plot-yearly-percentage" src="" alt="plot_yearly_percentage_changes" style="margin-top: -80px; margin-left:69px; display: none; width: 85%; margin-bottom: 35px" />
+
+
+</div>
+<div class="pie-chart-container" >
+<img id="pieChartContainer" src='' style=" margin-left:50px;display: none;width: 90%;">
+</div>
+
+  <!-- <div class="row"  > 
+            <h2>Top 5 Positive Keywords of Product Quality </h2>
+            <div class="column">
+                <img id="plotImage" src="data:image/png;base64,{{ ProductQualityPositiveKey }}" alt="Plot" width="500" height="500" style="float: left;margin-left: 160px;">
+            </div>
+            <div class="column">
+                <img id="negativePlotImage" src="data:image/png;base64,{{ ProductQualityNegativeKey }}" alt="Negative Plot" width="500" height="500" style="margin-left: 600px;">
+            </div>
+  </div>
+  <div class="row"  >
+    <h2>Top 5 Positive Keywords of Customer Service </h2>
+    <div class="column">
+        <img id="plotImage" src="data:image/png;base64,{{ CustomerServicePositiveKey }}" alt="Plot" width="500" height="500" style="float: left;margin-left: 160px;">
+    </div>
+    <div class="column">
+        <img id="negativePlotImage" src="data:image/png;base64,{{ CustomerServiceNegativeKey }}" alt="Negative Plot" width="500" height="500" style="margin-left: 600px;">
+    </div>
+</div>
+<div class="row"  >
+  <h2>Top 5 Positive Keywords of Customer Service </h2>
+  <div class="column">
+      <img id="plotImage" src="data:image/png;base64,{{ PurchaseExperiencePositiveKey }}" alt="Plot" width="500" height="500" style="float: left;margin-left: 160px;">
+  </div>
+  <div class="column">
+      <img id="negativePlotImage" src="data:image/png;base64,{{ PurchaseExperienceNegativeKey }}" alt="Negative Plot" width="500" height="500" style="margin-left: 600px;">
+  </div>
+</div>
+<div class="row"  >
+  <h2>Top 5 Positive Keywords of Customer Service </h2>
+  <div class="column">
+      <img id="plotImage" src="data:image/png;base64,{{ PricingPositiveKey }}" alt="Plot" width="500" height="500" style="float: left;margin-left: 160px;">
+  </div>
+  <div class="column">
+      <img id="negativePlotImage" src="data:image/png;base64,{{ PricingNegativeKey }}" alt="Negative Plot" width="500" height="500" style="margin-left: 600px;">
+  </div>
+</div>
+<div class="row"  > 
+  <h2>Top 5 Positive Keywords of Customer Service </h2>
+  <div class="column">
+      <img id="plotImage" src="data:image/png;base64,{{ DeliveryPositiveKey }}" alt="Plot" width="500" height="500" style="float: left;margin-left: 160px;">
+  </div>
+  <div class="column">
+      <img id="negativePlotImage" src="data:image/png;base64,{{ DeliveryNegativeKey }}" alt="Negative Plot" width="500" height="500" style="margin-left: 600px;">
+  </div>
+</div> -->
+
+<!-- <div class="row"> 
+  <div id="plotcontainer" style="display: none;">  Wrapper div for both elements
+    <h2 style="margin-left: 220px;">Number of Negative Reviews By Department</h2>
+    <div class="column">
+      <img id="plotImagereview" src='' alt="Plot" width="500" height="500" style="float: left; margin-left: 500px;display: none;">
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class ="row"> -->
+  <!-- <h2 style="margin-left: 20px;">N-gram Analysis of Negative Reviews by Department</h2> -->
+    <!-- {% include 'generate_bigram_table.html' with bigram_results=bigram_results %}
+</div> -->
+<!-- 
+<div id="bigramGrid" style="display: flex; flex-wrap: wrap; gap: 20px; margin-left: 120px; margin-top: 20px;">
+  {% for department, bigrams in bigram_results.items %}
+      <div class="bigramBox" style="flex: 1 0 calc(33.33% - 20px); border: 1px solid #ddd; padding: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+          <h3 style="text-align: center; font-size: 16px; margin: 0; padding: 10px;">
+              {{ department }}
+          </h3>
+          <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                  <tr>
+                      <th>N-gram</th>
+                      <th>Frequency</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for bigram, frequency in bigrams.items %}
+                      <tr>
+                          <td style="text-align: left; padding: 5px;">{{ bigram }}</td>
+                          <td style="text-align: center; padding: 5px;">{{ frequency }}</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  {% endfor %}
+</div> -->
+
+
+<div id="images-container" style = "margin-left: 200;"></div>
+
+<!-- <div class="container" style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;"> -->
+  
+  <!-- Section for Plot Image -->
+<!-- <div class="row"> -->
+  <!-- <h2 style="margin-left: 220px;">Number of Negative Reviews By Department</h2> -->
+  <!-- <div class="column"> -->
+<img id="plotImagereview" src='' alt="Plot" width="500" height="500" style="margin-left: 500px;width: 40%;display: none;">
+  <!-- </div> -->
+<!-- </div> -->
+
+  <!-- Section for Bigram Grid -->
+  <!-- <div id="bigramGrid" style="display: flex; flex-wrap: wrap; gap: 10px; margin-left: 200; margin-top: 20px;">
+    {% for department, bigrams in bigram_results.items %}
+      <div class="bigramBox" style="flex: 1 0 calc(30% - 10px); border: 1px solid #ddd; padding: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);margin-left: 200">
+          <h3 style="text-align: center; font-size: 14px; margin: 0; padding: 10px;">
+              {{ department }}
+          </h3>
+          <table style="width: 100%; border-collapse: collapse;font-size: 12px;">
+              <thead>
+                  <tr>
+                      <th style="padding: 2px;">N-gram</th>
+                      <th style="padding: 2px;">Frequency</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for bigram, frequency in bigrams.items %}
+                      <tr>
+                          <td style="text-align: left; padding: 1px;">{{ bigram }}</td>
+                          <td style="text-align: center; padding: 1px;">{{ frequency }}</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+    {% endfor %}
+  </div> -->
+
+<!-- </div> -->
+
+
+
+
+    <script>
+
+      function validateFileType(event) {
+                  const fileInput = document.querySelector('input[name="excel_file"]');
+                  const filePath = fileInput.value;
+                  const allowedExtension = /\.csv$/i;  // Only allow .csv files
+
+                  if (!allowedExtension.exec(filePath)) {
+                      alert("Please upload a file in CSV format only.");
+                      fileInput.value = '';  // Clear the input
+                      event.preventDefault();  // Prevent form submission
+                      return false;
+                  }
+                  return true;
+              }
+
+    // const progressPercentElem = document.getElementById('progress-percent');
+    // const timeRemainingElem = document.getElementById('time-remaining');
+
+    // // Initial time settings
+    // const totalIterations = 10;  // Example: total iterations = 10 seconds
+    // let startTime = new Date();
+
+    // // Connect to the progress stream
+    // const eventSource = new EventSource('/progress/');
+
+    // eventSource.onmessage = function(event) {
+    //     const progress = parseFloat(event.data);
+    //     progressPercentElem.innerText = progress.toFixed(2);
+
+    //     // Calculate elapsed time and remaining time
+    //     const elapsed = (new Date() - startTime) / 1000;
+    //     const estimatedRemainingTime = totalIterations * (1 - progress / 100) - elapsed;
+
+    //     // Display remaining time
+    //     timeRemainingElem.innerText = `${Math.max(0, estimatedRemainingTime.toFixed(2))} seconds`;
+
+    //     // Close connection and update timer on completion
+    //     if (progress >= 100) {
+    //         eventSource.close();
+    //         timeRemainingElem.innerText = "Rendering complete";
+    //     }
+    // };
+
+        console.log("show_results:", "{{ show_results }}");
+
+        function showTable() {
+    const table = document.getElementById("sentimentTable");
+    // Check if show_results is True in the context (passed from Django)
+    if ("{{show_results}}") {
+      table.style.display = "table";
+      multiplecheck.style.display = "block";
+    }
+  }
+ 
+
+//   // Call the function after the page loads (optional)
+  showTable();
+
+  
+  function showImages() {
+  // const plotImage = document.getElementById("plotImage");
+  // const negativePlotImage = document.getElementById("negativePlotImage");
+  // const productPlotImage = document.getElementById("productPlotImage");
+  // const productNegativePlotImage = document.getElementById("productNegativePlotImage");
+  const pieChartContainer = document.getElementById("pieChartContainer");
+  
+  // const npspiechart = document.getElementById("npspiechartcontainer");
+  // const npsthreepiechart = document.getElementById("npspiechartcontainerthree");
+  // const cloudfedexss = document.getElementById("cloudfedex");
+  // const plot=document.getElementById("plot");
+  const plotImagereview =document.getElementById("plotImagereview")
+  const keywordCountContainer = document.getElementById("keywordCountContainer");
+  const plotcontainer = document.getElementById("plotcontainer")
+
+
+  // Check if any of the image sources are empty
+  // if (plotImage.src.length > 0 && negativePlotImage.src.length > 0 && productPlotImage.src.length > 0 && productNegativePlotImage.src.length > 0 && pieChartContainer.src.length > 0
+  // && keywordCountContainer.src.length > 0 && npspiechart.src.length > 0 && npsthreepiechart.src.length > 0 && cloudfedexss.src.length > 0
+  // ) {
+  //   // Show the images if all sources are not empty
+  //   plotImage.style.display = "block";
+  //   negativePlotImage.style.display = "block";
+  //   productPlotImage.style.display = "block";
+  //   productNegativePlotImage.style.display = "block";
+  //   pieChartContainer.style.display = "block";
+  //   keywordCountContainer.style.display = "block";
+  //   npspiechart.style.display = "block";
+  //   npsthreepiechart.style.display = "block";
+  //   cloudfedexss.style.display = 'block'
+
+  // }
+
+  // if(keywordCountContainer.src.length > 0 )
+  if(pieChartContainer.src.length > 0 && plotImagereview.src.length > 0)
+  {
+    // npspiechart.style.display = "block";
+    // npsthreepiechart.style.display = "block";
+    pieChartContainer.style.display = "block";
+    // plotcontainer.style.display = "block";
+    // plot.style.display="block";
+    plotImagereview.style.display="block";
+
+  }
+}
+// showImages();
+    
+    // $(document).ready(function() {
+    //   // Send an AJAX request to initiate the progress bar updates
+    //   $.ajax({
+    //     url: '{% url "index" %}',
+    //     type: 'GET',
+    //     success: function(data) {
+    //       updateProgressBar(data.progress_percentage);
+    //     }
+    //   });
+
+    //   // Set up an interval to poll for progress updates
+    //   const intervalId = setInterval(function() {
+    //     $.ajax({
+    //       url: '{% url "index" %}',
+    //       type: 'GET',
+    //       success: function(data) {
+    //         updateProgressBar(data.progress_percentage);
+    //       }
+    //     });
+    //   }, 1000); // Adjust the interval as needed
+    // });
+
+//     function updateProgressBar(progressPercentage) {
+//       const progressBar = document.getElementById("progressBar");
+//       const progressLabel = document.getElementById("progressLabel");
+
+//       progressBar.style.width
+//     = progressPercentage + "%";
+//       progressLabel.textContent = progressPercentage + "%";
+//     }
+
+//     const form = document.getElementById('year-form');
+// const chartContainer = document.getElementById('chart-container');
+
+// form.addEventListener('submit', (event) => {
+//     event.preventDefault(); // Prevent default form submission
+
+//     const selectedYear = document.getElementById('year').value;
+
+//     // Call your Python script using a suitable method (e.g., Web Worker)
+//     // Replace this with your actual implementation
+//     fetch(`/sentiment_trendline/${selectedYear}`)  // Replace '/sentiment_trendline/' with your endpoint
+//         .then(response => response.json())
+//         .then(chartData => {
+//             // Clear any existing chart
+//             chartContainer.innerHTML = '';
+
+//             // Use a JavaScript library (e.g., Chart.js) to render the chart
+//             // based on the received `chartData` (replace with your library)
+//             const ctx = chartContainer.getContext('2d');
+//             const myChart = new Chart(ctx, {
+//                 type: 'line',
+//                 data: chartData,
+//                 options: {
+//                     // ... chart configuration options
+//                 }
+//             });
+//         })
+//         .catch(error => {
+//             console.error('Error fetching data:', error);
+//             // Handle errors (e.g., display an error message)
+//         });
+// });
+
+// function updatePlot() {
+//     const selectedCheckboxes = document.querySelectorAll('.year-checkbox:checked');
+//     const selectedYears = Array.from(selectedCheckboxes).map(checkbox => checkbox.value).join(',');
+
+//     console.log('Selected years:', selectedYears); // Log the selected years
+
+//     $.getJSON(`/update-plot?years=${selectedYears}`)
+//         .done(function(data) {
+//             console.log('Data received:', data); // Log the data received
+//             if (data.image) {
+//                 document.getElementById('plot').src = `data:image/png;base64,${data.image}`;
+//             } else {
+//                 console.error('No image data returned');
+//             }
+//         })
+//         .fail(function(jqXHR, textStatus, errorThrown) {
+//             console.error('Error fetching plot:', textStatus, errorThrown);
+//         });
+// }
+
+// // Load the initial plot when the page loads
+// $(document).ready(function() {
+//     updatePlot();
+// });
+
+// Function to check all checkboxes
+function checkAllCheckboxes() {
+    const checkboxes = document.querySelectorAll('.year-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = true; // Check each checkbox
+    });
+}
+
+// Toggle dropdown display
+document.getElementById('dropdown').addEventListener('click', function() {
+    const checkboxes = document.getElementById('checkboxes');
+    checkboxes.style.display = checkboxes.style.display === 'block' ? 'none' : 'block';
+});
+
+// Close the dropdown if clicked outside
+window.onclick = function(event) {
+    if (!event.target.matches('#dropdown')) {
+        document.getElementById('checkboxes').style.display = 'none';
+    }
+};
+
+
+// Load the initial plot when the page loads
+$(document).ready(function() {
+    checkAllCheckboxes(); // Check all checkboxes initially
+    updatePlot(); // Load the initial plot based on the checked boxes
+    
+});
+
+
+function updatePlot() {
+    const selectedCheckboxes = document.querySelectorAll('.year-checkbox:checked');
+
+
+
+    // if (selectedCheckboxes.length === 0) {
+    //     alert("Please select at least one year.");
+    //     return;  // Exit the function if no year is selected
+    // }
+
+    const selectedYears = Array.from(selectedCheckboxes).map(checkbox => checkbox.value).join(',');
+
+    console.log('Selected years:', selectedYears); // Log the selected years
+
+    $.getJSON(`/update-plot?years=${selectedYears}`)
+        .done(function(data) {
+            console.log('Data received:', data); // Log the data received
+            
+            // Update the images if data is received
+            if (data.image) {
+                const plotimg = document.getElementById('plot')
+                plotimg.src = `data:image/png;base64,${data.image}`;
+                plotimg.style.display='block';
+
+
+                // document.getElementById('plot').src = `data:image/png;base64,${data.image}`;
+
+                const npsthreeelem = document.getElementById('npspiechartcontainerthree')
+                npsthreeelem.src = `data:image/png;base64,${data.npspro_image}`;
+                npsthreeelem.style.display = 'block';
+
+
+
+                // document.getElementById('npspiechartcontainerthree').src = `data:image/png;base64,${data.npspro_image}`;
+                // document.getElementById('npspiechartcontainer').src = `data:image/png;base64,${data.nps_image}`;
+                const npsImageElem = document.getElementById('npspiechartcontainer');
+                npsImageElem.src = `data:image/png;base64,${data.nps_image}`;
+                npsImageElem.style.display = 'block';
+
+                const barchat =document.getElementById('pieChartContainer');
+                barchat.src=`data:image/png;base64,${data.PieChartPN}`
+                barchat.style.display = `block`;
+
+                const plotImagereview =document.getElementById('plotImagereview');
+                plotImagereview.src=`data:image/png;base64,${data.plot_negative_reviews_par}`
+                plotImagereview.style.display = `block`;
+
+                const plotyearlypercentage = document.getElementById('plot-yearly-percentage');
+                // plotyearlypercentage.src = `data:image/png;base64,${data.plot_yearly_percentage}`
+                // plotyearlypercentage.style.display = `block`;
+                if (data.plot_yearly_percentage) {
+                    // If there is image data, set the src and display the image
+                    plotyearlypercentage.src = `data:image/png;base64,${data.plot_yearly_percentage}`;
+                    plotyearlypercentage.style.display = 'block';
+                } else {
+                    // If there is no image data, hide the image
+                    plotyearlypercentage.style.display = 'none';
+                }
+
+                const counts = data.counts_percentage;
+
+                
+
+                console.log('counts received:', counts.positive_count)
+
+
+                const positiveCountElem = document.getElementById('positive-count');
+                const negativeCountElem = document.getElementById('negative-count');
+                const neutralCountElem = document.getElementById('neutral-count');
+                const positivePercentageElem = document.getElementById('positive-percentage');
+                const negativePercentageElem = document.getElementById('negative-percentage');
+                const neutralPercentageElem = document.getElementById('neutral-percentage');
+
+                if (positiveCountElem) positiveCountElem.innerText = counts.positive_count;
+                if (negativeCountElem) negativeCountElem.innerText = counts.negative_count;
+                if (neutralCountElem) neutralCountElem.innerText = counts.neutral_count;
+                if (positivePercentageElem) positivePercentageElem.innerText = `${counts.positive_count_percentage} %`;
+                if (negativePercentageElem) negativePercentageElem.innerText = `${counts.negative_count_percentage} %`;
+                if (neutralPercentageElem) neutralPercentageElem.innerText = `${counts.neutral_count_percentage} %`;
+
+                const countstotalreviews = data.total_reviews; // This should be a single value
+                const countyears = data.years;
+                const valueadditioncounts = document.getElementById('valueaddition');
+
+                if (valueadditioncounts) {
+                    valueadditioncounts.innerText = `Overall Sentiment Analysis Based on ${countstotalreviews} Reviews from ${countyears.join(', ')}`;
+                }
+
+                
+
+                // / Assuming `plot_bigrams_by_sentime` contains the list of base64 images
+                const base64Images = data.plot_bigrams_by_sentime;
+                const container = document.getElementById('images-container'); // The container for images
+
+                container.innerHTML = '';
+
+
+                if (base64Images === null || base64Images === undefined || base64Images.length === 0) {
+                    // If no valid images are returned (either None or empty array), clear the container
+                    container.innerHTML = '';  // Ensure the container is empty if no data
+                    container.display.style=`none`;
+                    console.warn('No bigram images available or only one year selected.');
+                } else {
+                    base64Images.forEach((base64Image, index) => {
+                        const img = document.createElement('img');
+                        img.src = `data:image/png;base64,${base64Image}`;
+                        img.alt = `Trigram Analysis Part ${index + 1}`;
+                        img.style.width = '80%';
+                        img.style.marginBottom = '5px'; // Adjust margin as needed
+                        img.style.marginLeft = '200px';
+
+                        const caption = document.createElement('p');
+                        caption.textContent = `Trigram Analysis - Part ${index + 1}`;
+
+                        container.appendChild(caption);
+                        container.appendChild(img);
+                    });
+                }
+                /*
+                if (base64Images && base64Images.length > 0) {
+                    base64Images.forEach((base64Image, index) => {
+                        const img = document.createElement('img');
+                        img.src = `data:image/png;base64,${base64Image}`;
+                        img.alt = `Trigram Analysis Part ${index + 1}`;
+                        img.style.width = '80%';
+
+                        img.style.marginBottom = '5px'; // Adjust margin as needed
+
+                        img.style.marginLeft = '200px';
+
+                        const caption = document.createElement('p');
+                        caption.textContent = `Trigram Analysis - Part ${index + 1}`;
+
+                        container.appendChild(caption);
+                        container.appendChild(img);
+                    });
+                } else {
+                    console.warn('No bigram images available in plot_bigrams_by_sentime');
+                }
+                  */
+                
+                // Overall Sentiment Analysis Based on 153,409 Reviews from 2016, 2018, and 2019
+                showTable();
+                showImages();
+                
+            } else {
+                console.error('No image data returned');
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            console.error('Error fetching plot:', textStatus, errorThrown);
+        });
+}
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     function updatePlot() {
+//         const selectedCheckboxes = document.querySelectorAll('.year-checkbox:checked');
+//         const selectedYears = Array.from(selectedCheckboxes).map(checkbox => checkbox.value).join(',');
+
+//         console.log('Selected years:', selectedYears); // Log the selected years
+
+//         $.getJSON(`/update-plot?years=${selectedYears}`)
+//             .done(function(data) {
+//                 console.log('Data received:', data); // Log the data received
+                
+//                 // Update the images if data is received
+//                 if (data.image) {
+//                     document.getElementById('plot').src = `data:image/png;base64,${data.image}`;
+//                     document.getElementById('npspiechartcontainerthree').src = `data:image/png;base64,${data.npspro_image}`;
+//                     document.getElementById('npspiechartcontainer').src = `data:image/png;base64,${data.nps_image}`;
+
+//                     const counts = data.counts_percentage;
+//                     console.log('Counts received:', counts.positive_count);
+
+//                     const positiveCountElem = document.getElementById('positive-count');
+//                     const negativeCountElem = document.getElementById('negative-count');
+//                     const neutralCountElem = document.getElementById('neutral-count');
+//                     const positivePercentageElem = document.getElementById('positive-percentage');
+//                     const negativePercentageElem = document.getElementById('negative-percentage');
+//                     const neutralPercentageElem = document.getElementById('neutral-percentage');
+
+//                     if (positiveCountElem) positiveCountElem.innerText = counts.positive_count;
+//                     if (negativeCountElem) negativeCountElem.innerText = counts.negative_count;
+//                     if (neutralCountElem) neutralCountElem.innerText = counts.neutral_count;
+//                     if (positivePercentageElem) positivePercentageElem.innerText = `${counts.positive_count_percentage} %`;
+//                     if (negativePercentageElem) negativePercentageElem.innerText = `${counts.negative_count_percentage} %`;
+//                     if (neutralPercentageElem) neutralPercentageElem.innerText = `${counts.neutral_count_percentage} %`;
+
+//                     // Call showTable after successfully updating the plot
+//                     showTable();
+                    
+//                 } else {
+//                     console.error('No image data returned');
+//                 }
+//             })
+//             .fail(function(jqXHR, textStatus, errorThrown) {
+//                 console.error('Error fetching plot:', textStatus, errorThrown);
+//             });
+//     }
+
+//     // Call updatePlot when needed, e.g., on a button click or checkbox change
+//     // Example: document.getElementById('update-button').addEventListener('click', updatePlot);
+// });
+
+
+
+
+
+// updatePlot()
+//   });
+    </script> 
+        
+</body>
+</html> 
