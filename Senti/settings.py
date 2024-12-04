@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
+import dj_database_url
+ 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -121,8 +124,15 @@ STATIC_URL = 'static/'
 # settings.py
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    'C:/Users/minal/OneDrive/Desktop/New folder/RushabhMehta/RushabhMehta/Sentimental/Senti/static',
+    os.path.join(BASE_DIR,'static'),
+
+    # STATICS_ROOT = os.path.join(BASE_DIR,'staticfiles')
+    # STATICFILES_DIRS = (os.path.join(BASE_DIR,'statics'),)
+    
+    # 'C:/Users/minal/OneDrive/Desktop/New folder/RushabhMehta/RushabhMehta/Sentimental/Senti/UI_Need/static',
 ]
+
+django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
