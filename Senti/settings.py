@@ -29,11 +29,13 @@ SECRET_KEY = 'django-insecure-np2o9*eadtqqvaas!kef6%%&aa^5$=$t)p1_tbsd0l#m+0-k(!
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+
 import os
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -124,13 +127,14 @@ STATIC_URL = 'static/'
 # settings.py
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    os.path.join(BASE_DIR,'static'),
 
-    # STATICS_ROOT = os.path.join(BASE_DIR,'staticfiles')
+    
     # STATICFILES_DIRS = (os.path.join(BASE_DIR,'statics'),)
     
     # 'C:/Users/minal/OneDrive/Desktop/New folder/RushabhMehta/RushabhMehta/Sentimental/Senti/UI_Need/static',
 ]
+
+STATICS_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 django_heroku.settings(locals())
 
