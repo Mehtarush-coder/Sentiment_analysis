@@ -1,7 +1,14 @@
 
 {
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/" }
-    ]
-  }
-  
+  "builds":[
+    {
+      "src": "Senti/wsgi.py",
+      "use": "@vercel/python",
+      "config":{"maxlambdasize":"15mb","runtime":"python3.12.6"}
+    }],
+    "routes":[{
+      "src":"/(.*)",
+      "dest":"Senti/wsgi.py"
+    }
+  ]
+}
