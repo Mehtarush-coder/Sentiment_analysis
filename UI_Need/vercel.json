@@ -1,16 +1,28 @@
+
 {
   "builds": [
     {
       "src": "Senti/wsgi.py",
       "use": "@vercel/python",
       "config": {
-        "maxLambdaSize": "15mb",  
+        "maxLambdaSize": "15mb", 
         "runtime": "python3.12.6"
+      }
+    },
+    {
+      "src": "build_files.sh",
+      "use": "@vercel/static-build",
+      "config":{
+        "distdir":"staticfiles_build"
       }
     }
   ],
-  "cmd": "pip install -r requirements.txt && python manage.py collectstatic --noinput",
+
   "routes": [
+    {
+      "src":"/static/(.*)",
+      "dest":"/static/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "Senti/wsgi.py"
